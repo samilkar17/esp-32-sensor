@@ -3,10 +3,14 @@ const mongoose = require('mongoose');
 const sensorSchema = new mongoose.Schema({
     temperatura: Number,
     humedad: Number,
-    timestamp: { type: Date, default: Date.now }
+    timestamp: { 
+        type: Date, 
+        default: () => new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' })
+    }
 }, {
-    collection: 'sensor' // Esto evita la pluralización y transformación
+    collection: 'sensor'
 });
 
 module.exports = mongoose.model('Sensor', sensorSchema);
+
 
